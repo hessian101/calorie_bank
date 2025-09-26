@@ -1,16 +1,117 @@
-# calorie_bank_app
+## カロリー貯金アプリ
+プロジェクト概要
+運動で消費したカロリーを「貯金」し、お菓子などを食べる時にその貯金から「引き落とす」Androidアプリ
+技術スタック
 
-A new Flutter project.
+Flutter
+ターゲット: Android
+状態管理: Provider または Riverpod
+ローカルストレージ: shared_preferences または sqflite
 
-## Getting Started
+主要機能
+1. カロリー入金機能
 
-This project is a starting point for a Flutter application.
+運動の種類を選択(ウォーキング、ランニング、水泳、筋トレなど)
+運動時間を入力
+自動的にカロリー消費量を計算して貯金残高に追加
+入金履歴の表示
 
-A few resources to get you started if this is your first Flutter project:
+2. カロリー引き落とし機能
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+お菓子や食べ物のカロリーを入力
+貯金残高から引き落とし
+残高不足の場合は警告表示
+引き落とし履歴の表示
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. カロリー貯金残高表示
+
+ホーム画面に現在の貯金残高を大きく表示
+今週/今月の入金・引き落とし統計
+グラフ表示(折れ線グラフやバーチャート)
+
+4. カロリー消費アドバイス機能
+
+ユーザーの目標設定(1日の目標消費カロリー)
+残高が少ない時の運動提案
+「あと○○kcal貯金すると、△△が食べられます」のような表示
+
+5. 履歴管理
+
+入金・引き落とし履歴の一覧
+日付でフィルタリング
+履歴の編集・削除機能
+
+UI/UX要件
+
+シンプルで直感的なデザイン
+Material Design 3を採用
+カラースキーム: 緑系(貯金のイメージ)とオレンジ系(消費のイメージ)
+ボトムナビゲーション: ホーム、入金、引き落とし、履歴、設定
+
+画面構成
+ホーム画面
+
+現在の貯金残高(大きく表示)
+今日の入金/引き落とし
+クイックアクション(入金・引き落としボタン)
+簡易グラフ
+
+入金画面
+
+運動種類選択ドロップダウン
+時間入力フィールド
+消費カロリー自動計算表示
+入金ボタン
+
+引き落とし画面
+
+食べ物名入力
+カロリー入力
+よく食べるものリスト(プリセット)
+引き落としボタン
+
+履歴画面
+
+タブ切り替え(全て/入金/引き落とし)
+リスト表示
+日付フィルター
+
+設定画面
+
+ユーザー情報(体重、身長、年齢)
+目標設定
+データリセット
+
+データモデル
+Transaction(取引記録)
+
+id: String
+type: enum (deposit/withdrawal)
+amount: int (カロリー)
+description: String
+category: String (運動種類 or 食べ物)
+timestamp: DateTime
+
+UserProfile
+
+weight: double
+height: double
+age: int
+dailyGoal: int
+
+実装の優先順位
+
+基本的なUI構造(ボトムナビゲーション、画面遷移)
+カロリー入金機能
+カロリー引き落とし機能
+残高表示とローカルストレージ保存
+履歴表示
+グラフ表示
+アドバイス機能
+設定画面
+
+追加要件
+
+カロリー計算ロジックは標準的なMETs(運動強度)を使用
+オフラインで完全動作
+データバックアップ機能(将来的に)
