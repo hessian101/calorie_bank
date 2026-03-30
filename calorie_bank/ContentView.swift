@@ -1,24 +1,30 @@
-//
-//  ContentView.swift
-//  calorie_bank
-//
-//  Created by kuriyahiromu on 2026/03/25.
-//
-
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Query private var profiles: [UserProfile]
+    @State private var hasCompletedOnboarding = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if profiles.isEmpty && !hasCompletedOnboarding {
+            OnboardingView {
+                hasCompletedOnboarding = true
+            }
+        } else {
+            TabView {
+                Tab("ホーム", systemImage: "house.fill") {
+                    HomeView()
+                }
+
+                Tab("履歴", systemImage: "clock.fill") {
+                    HistoryView()
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: [UserProfile.self, CalorieTransaction.self], inMemory: true)
 }

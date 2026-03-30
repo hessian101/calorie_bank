@@ -1,11 +1,5 @@
-//
-//  calorie_bankApp.swift
-//  calorie_bank
-//
-//  Created by kuriyahiromu on 2026/03/25.
-//
-
 import SwiftUI
+import SwiftData
 
 @main
 struct calorie_bankApp: App {
@@ -13,5 +7,6 @@ struct calorie_bankApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [UserProfile.self, CalorieTransaction.self])
     }
 }
